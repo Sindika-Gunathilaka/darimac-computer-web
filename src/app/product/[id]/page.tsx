@@ -45,8 +45,13 @@ export default function ProductPage() {
     try {
       const response = await fetch(`/api/products/${id}`)
       if (response.ok) {
-        const data = await response.json()
-        setProduct(data)
+        const text = await response.text()
+        if (text) {
+          const data = JSON.parse(text)
+          setProduct(data)
+        } else {
+          setError('Product not found')
+        }
       } else {
         setError('Product not found')
       }
