@@ -34,8 +34,8 @@ export async function POST(request: NextRequest) {
 
     // Return the Cloudinary URL
     return NextResponse.json({ 
-      imageUrl: (uploadResponse as any).secure_url,
-      publicId: (uploadResponse as any).public_id
+      imageUrl: (uploadResponse as { secure_url: string; public_id: string }).secure_url,
+      publicId: (uploadResponse as { secure_url: string; public_id: string }).public_id
     })
 
   } catch (error) {

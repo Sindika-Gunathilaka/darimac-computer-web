@@ -62,7 +62,7 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<'products' | 'orders'>('products')
   const [products, setProducts] = useState<Product[]>([])
   const [orders, setOrders] = useState<Order[]>([])
-  const [ordersPagination, setOrdersPagination] = useState<any>(null)
+  const [ordersPagination, setOrdersPagination] = useState<{ currentPage: number; totalPages: number; totalOrders: number; hasNextPage: boolean; hasPrevPage: boolean; limit: number } | null>(null)
   const [currentOrdersPage, setCurrentOrdersPage] = useState(1)
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)

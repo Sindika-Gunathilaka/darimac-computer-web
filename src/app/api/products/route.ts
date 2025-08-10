@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit
 
     // Build where clause
-    const where: any = {}
+    const where: Record<string, unknown> = {}
     
     if (search) {
       where.OR = [
@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Fetch products error:', error)
-    return NextResponse.json({ error: 'Failed to fetch products', details: error.message }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to fetch products', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 })
   }
 }
 
@@ -88,6 +88,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(product)
   } catch (error) {
     console.error('Create product error:', error)
-    return NextResponse.json({ error: 'Failed to create product', details: error.message }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to create product', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 })
   }
 }

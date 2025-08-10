@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         customerAddress,
         totalAmount,
         items: {
-          create: items.map((item: any) => ({
+          create: items.map((item: { productId: number; quantity: number; price: number }) => ({
             productId: item.productId,
             quantity: item.quantity,
             price: item.price
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(order)
   } catch (error) {
     console.error('Create order error:', error)
-    return NextResponse.json({ error: 'Failed to create order', details: error.message }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to create order', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 })
   }
 }
 
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit
 
     // Build where clause
-    const where: any = {}
+    const where: Record<string, unknown> = {}
     if (status) {
       where.status = status
     }
@@ -93,6 +93,6 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Fetch orders error:', error)
-    return NextResponse.json({ error: 'Failed to fetch orders', details: error.message }, { status: 500 })
+    return NextResponse.json({ error: 'Failed to fetch orders', details: error instanceof Error ? error.message : 'Unknown error' }, { status: 500 })
   }
 }
