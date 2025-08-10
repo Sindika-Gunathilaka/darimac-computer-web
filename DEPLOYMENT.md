@@ -1,6 +1,5 @@
 # DARIMAC TECHNOLOGIES - Deployment Guide
 
-
 ## Overview
 This guide covers deploying the DARIMAC TECHNOLOGIES computer accessories e-commerce application.
 
